@@ -1,13 +1,15 @@
-# Day 7 - ATM Simulation (Advanced)
+# Day 7 - Advanced ATM Simulation
 
 balance = 1000
 correct_pin = "1234"
 transactions = []
+
 max_attempts = 3
 attempts = 0
 
+
 # -----------------------------
-# PIN verification with limit
+# PIN verification
 # -----------------------------
 
 while attempts < max_attempts:
@@ -20,14 +22,15 @@ while attempts < max_attempts:
 
     else:
         attempts += 1
-        print("Wrong PIN.")
+        print("Wrong PIN")
 
         if attempts < max_attempts:
-            print("Try again.\n")
+            print("Try again\n")
 
 else:
     print("Your card has been blocked.")
     exit()
+
 
 # -----------------------------
 # ATM MENU
@@ -35,35 +38,57 @@ else:
 
 choice = ""
 
-while choice != "5":
+while choice != "7":
 
     print("\n--- ATM MENU ---")
     print("1 - Check Balance")
     print("2 - Deposit Money")
     print("3 - Withdraw Money")
-    print("4 - Transaction History")
-    print("5 - Exit")
+    print("4 - Transfer Money")
+    print("5 - Transaction History")
+    print("6 - Change PIN")
+    print("7 - Exit")
 
     choice = input("Choose an option: ")
 
+    # -----------------------------
+    # Check Balance
+    # -----------------------------
+
     if choice == "1":
-        print("Your balance is:", balance)
+
+        print("Your balance:", balance)
+
+    # -----------------------------
+    # Deposit
+    # -----------------------------
 
     elif choice == "2":
 
-        deposit = float(input("Enter amount to deposit: "))
-        balance += deposit
-        transactions.append(f"Deposited: {deposit}")
+        deposit = float(input("Enter deposit amount: "))
 
-        print("Deposit successful")
-        print("New balance:", balance)
+        if deposit <= 0:
+            print("Invalid amount")
+
+        else:
+            balance += deposit
+            transactions.append(f"Deposited {deposit}")
+            print("Deposit successful")
+            print("New balance:", balance)
+
+    # -----------------------------
+    # Withdraw
+    # -----------------------------
 
     elif choice == "3":
 
-        withdraw = float(input("Enter amount to withdraw: "))
+        withdraw = float(input("Enter withdraw amount: "))
         withdraw_limit = 500
 
-        if withdraw > withdraw_limit:
+        if withdraw <= 0:
+            print("Invalid amount")
+
+        elif withdraw > withdraw_limit:
             print("Withdrawal limit is 500")
 
         elif withdraw > balance:
@@ -71,14 +96,38 @@ while choice != "5":
 
         else:
             balance -= withdraw
-            transactions.append(f"Withdrew: {withdraw}")
-
+            transactions.append(f"Withdrew {withdraw}")
             print("Withdrawal successful")
             print("New balance:", balance)
 
+    # -----------------------------
+    # Transfer
+    # -----------------------------
+
     elif choice == "4":
 
-        print("\nTransaction History:")
+        account = input("Enter receiver account number: ")
+        amount = float(input("Enter transfer amount: "))
+
+        if amount <= 0:
+            print("Invalid amount")
+
+        elif amount > balance:
+            print("Insufficient balance")
+
+        else:
+            balance -= amount
+            transactions.append(f"Transferred {amount} to {account}")
+            print("Transfer successful")
+            print("New balance:", balance)
+
+    # -----------------------------
+    # Transaction History
+    # -----------------------------
+
+    elif choice == "5":
+
+        print("\nTransaction History")
 
         if len(transactions) == 0:
             print("No transactions yet")
@@ -87,20 +136,50 @@ while choice != "5":
             for t in transactions:
                 print("-", t)
 
-    elif choice == "5":
+    # -----------------------------
+    # Change PIN
+    # -----------------------------
 
-        print("\n--- RECEIPT ---")
-        print("Final balance:", balance)
+    elif choice == "6":
 
-        print("\nTransactions:")
-        if len(transactions) == 0:
-            print("No transactions")
+        old_pin = input("Enter current PIN: ")
+
+        if old_pin == correct_pin:
+
+            new_pin = input("Enter new PIN: ")
+            correct_pin = new_pin
+
+            print("PIN changed successfully")
 
         else:
-            for t in transactions:
-                print("-", t)
+            print("Wrong PIN")
 
-        print("\nThank you for using the ATM")
+    # -----------------------------
+    # Exit
+    # -----------------------------
 
-    else:
-        print("Invalid option")
+    elif choice == "7":
+
+        confirm = input("Are you sure you want to exit? (y/n): ")
+
+        if confirm == "y":
+
+            print("\n--- RECEIPT ---")
+            print("Final balance:", balance)
+
+            print("\nTransactions:")
+            if len(transactions) == 0:
+                print("No transactions")
+            else:
+                for t in transactions:
+                    print("-", t)
+
+            print("\nThank you for using the ATM")
+            break
+
+        elif confirm == "n":
+            print("Returning to menu...")
+            choice = ""  # menüye kesin dönüş
+
+        else:
+            print("Invalid input")
