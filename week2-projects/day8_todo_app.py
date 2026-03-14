@@ -1,6 +1,19 @@
-# Day 8 - Improved To Do List App
+import json
 
-tasks = []
+# -----------------------------
+# Load tasks from file
+# -----------------------------
+
+try:
+    with open("tasks.json", "r") as file:
+        tasks = json.load(file)
+except:
+    tasks = []
+
+
+# -----------------------------
+# Main program
+# -----------------------------
 
 choice = ""
 
@@ -16,7 +29,7 @@ while choice != "5":
     choice = input("Choose an option: ")
 
     # -----------------------------
-    # View Tasks
+    # View tasks
     # -----------------------------
 
     if choice == "1":
@@ -39,7 +52,7 @@ while choice != "5":
                 print(i + 1, "-", task["title"], "-", status)
 
     # -----------------------------
-    # Add Task
+    # Add task
     # -----------------------------
 
     elif choice == "2":
@@ -56,7 +69,7 @@ while choice != "5":
         print("Task added")
 
     # -----------------------------
-    # Mark task as done
+    # Mark task done
     # -----------------------------
 
     elif choice == "3":
@@ -69,7 +82,7 @@ while choice != "5":
             for i in range(len(tasks)):
                 print(i + 1, "-", tasks[i]["title"])
 
-            number = int(input("Enter task number to mark as done: "))
+            number = int(input("Enter task number: "))
 
             if 1 <= number <= len(tasks):
 
@@ -77,7 +90,7 @@ while choice != "5":
                 print("Task marked as done")
 
             else:
-                print("Invalid task number")
+                print("Invalid number")
 
     # -----------------------------
     # Remove task
@@ -93,18 +106,24 @@ while choice != "5":
             for i in range(len(tasks)):
                 print(i + 1, "-", tasks[i]["title"])
 
-            number = int(input("Enter task number to remove: "))
+            number = int(input("Enter task number: "))
 
             if 1 <= number <= len(tasks):
 
                 removed = tasks.pop(number - 1)
-                print("Removed task:", removed["title"])
+                print("Removed:", removed["title"])
 
             else:
-                print("Invalid task number")
+                print("Invalid number")
 
     elif choice == "5":
-        print("Goodbye!")
+
+        print("Saving tasks...")
+
+        with open("tasks.json", "w") as file:
+            json.dump(tasks, file)
+
+        print("Tasks saved. Goodbye!")
 
     else:
         print("Invalid option")
