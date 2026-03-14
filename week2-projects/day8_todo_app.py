@@ -1,20 +1,24 @@
-# Day 8 - To Do List App
+# Day 8 - Improved To Do List App
 
 tasks = []
 
 choice = ""
 
-while choice != "4":
+while choice != "5":
 
     print("\n--- TO DO LIST ---")
     print("1 - View Tasks")
     print("2 - Add Task")
-    print("3 - Remove Task")
-    print("4 - Exit")
+    print("3 - Mark Task as Done")
+    print("4 - Remove Task")
+    print("5 - Exit")
 
     choice = input("Choose an option: ")
 
-    # View tasks
+    # -----------------------------
+    # View Tasks
+    # -----------------------------
+
     if choice == "1":
 
         if len(tasks) == 0:
@@ -22,40 +26,84 @@ while choice != "4":
 
         else:
             print("\nYour Tasks:")
-            for i in range(len(tasks)):
-                print(i + 1, "-", tasks[i])
 
-    # Add task
+            for i in range(len(tasks)):
+
+                task = tasks[i]
+
+                if task["done"]:
+                    status = "✔"
+                else:
+                    status = "✘"
+
+                print(i + 1, "-", task["title"], "-", status)
+
+    # -----------------------------
+    # Add Task
+    # -----------------------------
+
     elif choice == "2":
 
-        task = input("Enter new task: ")
+        title = input("Enter new task: ")
+
+        task = {
+            "title": title,
+            "done": False
+        }
+
         tasks.append(task)
 
         print("Task added")
 
-    # Remove task
+    # -----------------------------
+    # Mark task as done
+    # -----------------------------
+
     elif choice == "3":
+
+        if len(tasks) == 0:
+            print("No tasks available")
+
+        else:
+
+            for i in range(len(tasks)):
+                print(i + 1, "-", tasks[i]["title"])
+
+            number = int(input("Enter task number to mark as done: "))
+
+            if 1 <= number <= len(tasks):
+
+                tasks[number - 1]["done"] = True
+                print("Task marked as done")
+
+            else:
+                print("Invalid task number")
+
+    # -----------------------------
+    # Remove task
+    # -----------------------------
+
+    elif choice == "4":
 
         if len(tasks) == 0:
             print("No tasks to remove")
 
         else:
 
-            print("\nYour Tasks:")
             for i in range(len(tasks)):
-                print(i + 1, "-", tasks[i])
+                print(i + 1, "-", tasks[i]["title"])
 
-            task_number = int(input("Enter task number to remove: "))
+            number = int(input("Enter task number to remove: "))
 
-            if 1 <= task_number <= len(tasks):
+            if 1 <= number <= len(tasks):
 
-                removed = tasks.pop(task_number - 1)
-                print("Removed task:", removed)
+                removed = tasks.pop(number - 1)
+                print("Removed task:", removed["title"])
 
             else:
                 print("Invalid task number")
 
-    elif choice == "4":
+    elif choice == "5":
         print("Goodbye!")
 
     else:
