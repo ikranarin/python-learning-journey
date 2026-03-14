@@ -35,3 +35,26 @@ In the first week of my Python learning journey, I focused on fundamental progra
 - `day7_atm_simulation.py`
 
 This week helped me understand the core logic of programming in Python and build my first mini console applications.
+
+## Week 2 – Mini Projects
+
+### Day 8 – To-Do List Application
+
+In this project, I built a console-based To-Do List application using Python. The program allows users to manage their tasks through a simple menu system.
+
+#### Features
+- View all tasks
+- Add new tasks
+- Mark tasks as completed
+- Remove tasks
+- Save tasks to a JSON file so they persist after the program closes
+
+#### Concepts Practiced
+- Lists and dictionaries
+- Loops and conditional statements
+- File handling
+- JSON data storage
+- Basic application structure
+
+#### File
+- `day8_todo_app.py`
