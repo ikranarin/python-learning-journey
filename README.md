@@ -58,3 +58,23 @@ In this project, I built a console-based To-Do List application using Python. Th
 
 #### File
 - `day8_todo_app.py`
+
+### Day 9 – Password Generator
+A Python program that generates secure random passwords based on user preferences.
+
+**Features**
+- User chooses password length
+- Generate multiple passwords at once
+- Ensures each password contains letters, numbers, and symbols
+- Randomly shuffles characters for stronger security
+- Option to save generated passwords to a file
+
+**Concepts Practiced**
+- Random module
+- String module
+- Lists and loops
+- File writing
+- Basic security logic
+
+**File**
+- `day9_password_generator.py`
