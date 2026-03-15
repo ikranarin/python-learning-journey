@@ -4,25 +4,49 @@ import string
 print("=== PASSWORD GENERATOR ===")
 
 length = int(input("Enter password length: "))
-use_numbers = input("Include numbers? (y/n): ")
-use_symbols = input("Include symbols? (y/n): ")
+count = int(input("How many passwords to generate?: "))
 
-characters = list(string.ascii_letters)
+letters = string.ascii_letters
+numbers = string.digits
+symbols = string.punctuation
 
-if use_numbers == "y":
-    characters += list(string.digits)
+all_characters = letters + numbers + symbols
 
-if use_symbols == "y":
-    characters += list(string.punctuation)
+passwords = []
 
-password = []
+for _ in range(count):
 
-for i in range(length):
-    password.append(random.choice(characters))
+    password = []
 
-random.shuffle(password)
+    # ensure at least one of each
+    password.append(random.choice(letters))
+    password.append(random.choice(numbers))
+    password.append(random.choice(symbols))
 
-final_password = "".join(password)
+    for i in range(length - 3):
+        password.append(random.choice(all_characters))
 
-print("\nGenerated password:")
-print(final_password)
+    random.shuffle(password)
+
+    final_password = "".join(password)
+
+    passwords.append(final_password)
+
+
+print("\nGenerated Passwords:")
+
+for p in passwords:
+    print(p)
+
+
+# save passwords to file
+save = input("\nSave passwords to file? (y/n): ")
+
+if save == "y":
+
+    with open("generated_passwords.txt", "w") as file:
+
+        for p in passwords:
+            file.write(p + "\n")
+
+    print("Passwords saved to generated_passwords.txt")
