@@ -78,3 +78,26 @@ A Python program that generates secure random passwords based on user preference
 
 **File**
 - `day9_password_generator.py`
+
+### Day 10 – Ultra Guessing Game
+
+An advanced terminal-based number guessing game with enhanced features.
+
+**Features**
+- Player Mode with scoring system  
+- AI Mode (computer guesses your number)  
+- Persistent stats: wins, losses, high score (saved in `game_data.json`)  
+- Advanced hint system (very close, close, far)  
+- Replayable, modular structure  
+
+**Concepts Practiced**
+- Loops and conditional logic  
+- Functions and modular code  
+- Random number generation  
+- File handling and JSON persistence  
+- Basic AI (binary search strategy)  
+- Game design and user interaction  
+
+**Files**
+- `day10_guessing_game.py`  
+- `game_data.json` (created automatically to store high score and stats)
