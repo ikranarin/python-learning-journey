@@ -2,95 +2,140 @@ import random
 import json
 
 # -----------------------------
-# Load high score
+# LOAD DATA
+# -----------------------------
+try:
+    with open("game_data.json", "r") as file:
+        data = json.load(file)
+except:
+    data = {
+        "highscore": 0,
+        "wins": 0,
+        "losses": 0
+    }
+
+# -----------------------------
+# FUNCTIONS
 # -----------------------------
 
-try:
-    with open("highscore.json", "r") as file:
-        highscore = json.load(file)
-except:
-    highscore = 0
+def save_data():
+    with open("game_data.json", "w") as file:
+        json.dump(data, file)
 
 
-print("=== NUMBER GUESSING GAME ===")
+def player_mode():
 
-while True:
+    print("\n=== PLAYER MODE ===")
 
-    print("\n🏆 High Score:", highscore)
+    max_number = 100
+    attempts = 10
 
-    print("\nSelect Difficulty:")
-    print("1 - Easy (1-10, 5 attempts)")
-    print("2 - Medium (1-50, 7 attempts)")
-    print("3 - Hard (1-100, 10 attempts)")
-
-    difficulty = input("Choose: ")
-
-    if difficulty == "1":
-        max_number = 10
-        attempts = 5
-    elif difficulty == "2":
-        max_number = 50
-        attempts = 7
-    elif difficulty == "3":
-        max_number = 100
-        attempts = 10
-    else:
-        print("Invalid choice")
-        continue
-
-    secret_number = random.randint(1, max_number)
-
-    print(f"\nI picked a number between 1 and {max_number}")
-
+    secret = random.randint(1, max_number)
     score = 0
 
     for i in range(attempts):
 
-        guess = int(input("Enter your guess: "))
+        guess = int(input("Your guess: "))
+        diff = abs(secret - guess)
 
-        diff = abs(secret_number - guess)
-
-        if guess == secret_number:
-
+        if guess == secret:
             score = (attempts - i) * 10
-            print("🎉 Correct! You win!")
-            print("Your score:", score)
+            print("🎉 Correct!")
             break
 
-        elif guess < secret_number:
+        elif guess < secret:
             print("Too low")
-
         else:
             print("Too high")
 
-        # Hint system
         if diff <= 3:
-            print("🔥 Very close!")
+            print("VERY CLOSE")
         elif diff <= 10:
-            print("🙂 Close")
+            print("Close")
         else:
-            print("❄️ Far")
+            print("Far")
 
         print(f"Remaining attempts: {attempts - i - 1}")
 
     else:
-        print(f"\n💀 You lost! The number was {secret_number}")
-        score = 0
+        print(f"\n💀 Lost! Number was {secret}")
+        data["losses"] += 1
+        save_data()
+        return
 
-    # -----------------------------
-    # High score check
-    # -----------------------------
+    print(f"Score: {score}")
 
-    if score > highscore:
-        print("🏆 New High Score!")
-        highscore = score
+    data["wins"] += 1
 
-        with open("highscore.json", "w") as file:
-            json.dump(highscore, file)
+    if score > data["highscore"]:
+        print("🏆 NEW HIGH SCORE!")
+        data["highscore"] = score
 
-    # play again
-    again = input("\nPlay again? (y/n): ")
+    save_data()
 
-    if again != "y":
-        print("Thanks for playing!")
+
+def ai_mode():
+
+    print("\n=== AI MODE ===")
+
+    low = 1
+    high = 100
+
+    secret = int(input("Pick a number (1-100): "))
+
+    attempts = 0
+
+    while True:
+        guess = (low + high) // 2
+        attempts += 1
+
+        print(f"AI guesses: {guess}")
+
+        if guess == secret:
+            print(f"🤖 AI found it in {attempts} steps!")
+            break
+
+        elif guess < secret:
+            print("Going higher...")
+            low = guess + 1
+        else:
+            print("Going lower...")
+            high = guess - 1
+
+
+def show_stats():
+    print("\n=== STATS ===")
+    print("Wins:", data["wins"])
+    print("Losses:", data["losses"])
+    print("High Score:", data["highscore"])
+
+
+# -----------------------------
+# MAIN LOOP
+# -----------------------------
+
+while True:
+
+    print("\n=== MAIN MENU ===")
+    print("1 - Play")
+    print("2 - AI Mode")
+    print("3 - Stats")
+    print("4 - Exit")
+
+    choice = input("Choose: ")
+
+    if choice == "1":
+        player_mode()
+
+    elif choice == "2":
+        ai_mode()
+
+    elif choice == "3":
+        show_stats()
+
+    elif choice == "4":
+        print("Thanks for playing! Goodbye!")
         break
+
+    else:
+        print("Invalid choice")
