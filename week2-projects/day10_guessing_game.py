@@ -1,8 +1,22 @@
 import random
+import json
+
+# -----------------------------
+# Load high score
+# -----------------------------
+
+try:
+    with open("highscore.json", "r") as file:
+        highscore = json.load(file)
+except:
+    highscore = 0
+
 
 print("=== NUMBER GUESSING GAME ===")
 
 while True:
+
+    print("\n🏆 High Score:", highscore)
 
     print("\nSelect Difficulty:")
     print("1 - Easy (1-10, 5 attempts)")
@@ -28,6 +42,8 @@ while True:
 
     print(f"\nI picked a number between 1 and {max_number}")
 
+    score = 0
+
     for i in range(attempts):
 
         guess = int(input("Enter your guess: "))
@@ -35,7 +51,10 @@ while True:
         diff = abs(secret_number - guess)
 
         if guess == secret_number:
+
+            score = (attempts - i) * 10
             print("🎉 Correct! You win!")
+            print("Your score:", score)
             break
 
         elif guess < secret_number:
@@ -56,6 +75,18 @@ while True:
 
     else:
         print(f"\n💀 You lost! The number was {secret_number}")
+        score = 0
+
+    # -----------------------------
+    # High score check
+    # -----------------------------
+
+    if score > highscore:
+        print("🏆 New High Score!")
+        highscore = score
+
+        with open("highscore.json", "w") as file:
+            json.dump(highscore, file)
 
     # play again
     again = input("\nPlay again? (y/n): ")
