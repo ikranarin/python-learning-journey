@@ -101,3 +101,48 @@ An advanced terminal-based number guessing game with enhanced features.
 **Files**
 - `day10_guessing_game.py`  
 - `game_data.json` (created automatically to store high score and stats)
+
+### Day 11 – Quiz Game (GUI)
+
+In this project, I built a graphical quiz game using Python and Tkinter. The application allows users to answer multiple-choice questions with different difficulty levels.
+
+#### Features
+- Graphical user interface (GUI) using Tkinter
+- Multiple difficulty levels (Easy, Medium, Hard)
+- Randomized questions
+- Score tracking system
+- High score saved to a JSON file
+- Interactive buttons for user input
+
+#### Concepts Practiced
+- GUI development with Tkinter
+- Object-oriented programming (OOP)
+- Event-driven programming
+- Lists and dictionaries
+- File handling and JSON storage
+- Randomization
+
+#### Files
+- `day11_quiz_game.py`
+- `quiz_score.json` (stores high score)
+
+
+### Day 12 – File Organizer
+
+In this project, I developed a Python script that automatically organizes files in a selected folder based on their file types.
+
+#### Features
+- Scans a given directory
+- Automatically creates folders by file type (images, documents, videos, etc.)
+- Moves files into appropriate folders
+- Handles unknown file types by placing them into an "others" folder
+
+#### Concepts Practiced
+- Working with the OS module
+- File and directory management
+- Automation scripts
+- Using shutil for file operations
+- Real-world problem solving
+
+#### File
+- `day12_file_organizer.py`
