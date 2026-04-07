@@ -1,0 +1,12 @@
+[
+    {
+        "amount": 105.0,
+        "category": "food",
+        "note": "breakfast"
+    },
+    {
+        "amount": 150.0,
+        "category": "coffee",
+        "note": "coffy"
+    }
+]
