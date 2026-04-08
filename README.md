@@ -189,3 +189,31 @@ In this project, I developed a console-based expense tracking application to man
 #### Files
 - `day14_expense_tracker.py`
 - `expenses.json` (stores expense data)
+
+## Week 3 – More Projects
+
+### Day 15 – OOP Task Manager
+
+In this project, I built an object-oriented task management application using Python. The program allows users to create, manage, and persist tasks with a clean and modular structure.
+
+**Features**
+- Add new tasks with title, priority, and status  
+- Mark tasks as completed  
+- Delete tasks  
+- View all tasks in a structured format  
+- Data persistence using JSON (tasks are saved automatically)  
+- Modular and scalable design using classes  
+
+**Concepts Practiced**
+- Object-Oriented Programming (classes and objects)  
+- Encapsulation and class methods  
+- File handling and JSON persistence  
+- Code organization across multiple files  
+- Basic software design principles  
+
+**Project Structure**
+- `task.py` → Task class definition  
+- `day15_task_manager.py` → Task manager logic  
+- `main.py` → Main program and user interface  
+
+This project helped me understand how to structure larger Python programs using OOP principles and separate concerns across multiple files.
