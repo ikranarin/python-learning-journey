@@ -146,3 +146,46 @@ In this project, I developed a Python script that automatically organizes files 
 
 #### File
 - `day12_file_organizer.py`
+
+### Day 13 – Pomodoro Timer
+
+In this project, I built a real-time Pomodoro timer that helps manage study and break sessions using the Pomodoro technique.
+
+#### Features
+- Work and break timer system (25/5 minutes)
+- Real-time countdown display
+- Automatic transition between work and break sessions
+- Continuous cycle option
+
+#### Concepts Practiced
+- Time module usage
+- Countdown logic
+- While loops and control flow
+- Real-time terminal output
+
+#### File
+- `day13_pomodoro_timer.py`
+
+
+### Day 14 – Expense Tracker
+
+In this project, I developed a console-based expense tracking application to manage daily spending.
+
+#### Features
+- Add and store expenses
+- Categorize expenses (food, transport, etc.)
+- View all expenses
+- Calculate total spending
+- Category-based summary
+- Data persistence using JSON
+
+#### Concepts Practiced
+- Lists and dictionaries
+- File handling and JSON storage
+- Data aggregation and analysis
+- User input handling
+- Basic financial logic
+
+#### Files
+- `day14_expense_tracker.py`
+- `expenses.json` (stores expense data)
